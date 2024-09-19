@@ -6,6 +6,7 @@ import prisma from "./lib/db";
 import { type CategoryTypes } from "@prisma/client";
 import { stripe } from "./lib/stripe";
 import { redirect } from "next/navigation";
+
 export type State = {
   status: "error" | "success" | undefined;
   errors?: {
@@ -30,6 +31,7 @@ const productSchema = z.object({
     .min(1, { message: "Please upload a zip of your product" }),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function SellProduct(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -81,7 +83,7 @@ const userSettigsSchema = z.object({
     .or(z.literal(""))
     .optional(),
 });
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function UpdateUserSettings(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -101,6 +103,8 @@ export async function UpdateUserSettings(prevState: any, formData: FormData) {
     };
     return state;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const data = await prisma.user.update({
     where: {
       id: user.id,

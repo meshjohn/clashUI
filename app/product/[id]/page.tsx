@@ -2,7 +2,8 @@ import { BuyProduct } from "@/app/actions";
 import ProductDescription from "@/app/components/ProductDescription";
 import { BuyButton } from "@/app/components/SubmitButton";
 import prisma from "@/app/lib/db";
-import { Button } from "@/components/ui/button";
+import { unstable_noStore as noStore } from "next/cache";
+
 import {
   Carousel,
   CarouselContent,
@@ -43,6 +44,7 @@ export default async function ProductPage({
 }: {
   params: { id: string };
 }) {
+  noStore();
   const data = await getData(params.id);
   return (
     <section className="max-w-7xl mx-auto px-4 lg:px-8 lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
@@ -71,7 +73,7 @@ export default async function ProductPage({
         <p className="mt-6 text-muted-foreground">{data?.smallDescription}</p>
         <form action={BuyProduct}>
           <input type="hidden" name="id" value={data?.id} />
-          <BuyButton price={data?.price!} />
+          <BuyButton price={data?.price ?? 0} />
         </form>
         <div className="border-t border-gray-200 mt-10 pt-10">
           <div className="grid grid-cols-2 w-full gap-y-3">

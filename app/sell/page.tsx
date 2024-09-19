@@ -3,6 +3,7 @@ import { SellForm } from "../components/form/SellerForm";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import prisma from "../lib/db";
 import { redirect } from "next/navigation";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function getData(userId: string) {
   const data = await prisma.user.findUnique({
@@ -20,11 +21,13 @@ async function getData(userId: string) {
 }
 
 export default async function SellRoute() {
+  noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   if (!user) {
     throw new Error("Unauthorized");
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const data = await getData(user.id);
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-8 mb-14">

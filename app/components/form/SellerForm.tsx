@@ -116,6 +116,7 @@ export function SellForm() {
               setImages(res.map((item) => item.url));
               toast.success("Your images have been uploaded");
             }}
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onUploadError={(error: Error) => {
               toast.error("Something went wrong, try again");
             }}
@@ -141,6 +142,7 @@ export function SellForm() {
               setProductFile(res[0].url);
               toast.success("Your Product file has been uploaded");
             }}
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onUploadError={(error: Error) => {
               toast.error("Something went wrong, try again");
             }}
