@@ -19,7 +19,7 @@ export async function POST(req: Request) {
   switch (event.type) {
     case "account.updated": {
       const account = event.data.object;
-
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const data = await prisma.user.update({
         where: {
           connectedAccountId: account.id,

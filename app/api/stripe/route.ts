@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       const session = event.data.object;
 
       const link = session.metadata?.link;
-
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data, error } = await resend.emails.send({
         from: "ClashUI <meshjohn1@gmail.com>",
         to: [""],
